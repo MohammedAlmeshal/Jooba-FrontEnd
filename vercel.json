@@ -1,13 +1,53 @@
 {
-    "headers": [
-      {
-        "source": "/api/(.*)",
-        "headers": [
-          { "key": "Access-Control-Allow-Credentials", "value": "true" },
-          { "key": "Access-Control-Allow-Origin", "value": "*" },
-          { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-          { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
-        ]
-      }
-    ]
-  }
+  "redirects": [
+    {
+      "source": "/api/auth/user",
+      "destination": "https://jooba.herokuapp.com/api/auth/user"
+    },
+    {
+      "source": "/api/auth",
+      "destination": "https://jooba.herokuapp.com/api/auth"
+    },
+    {
+      "source": "/api/users",
+      "destination": "https://jooba.herokuapp.com/api/users"
+    },
+    {
+      "source": "/api/profiles",
+      "destination": "https://jooba.herokuapp.com/api/profiles"
+    },
+    {
+      "source": "/api/profiles/:username",
+      "destination": "https://jooba.herokuapp.com/api/profiles/:username"
+    },
+    {
+      "source": "/api/posts/answer/:id",
+      "destination": "https://jooba.herokuapp.com/api/posts/answer/:id"
+    },
+    {
+      "source": "/api/posts/:id",
+      "destination": "https://jooba.herokuapp.com/api/posts/:id"
+    },
+    {
+      "source": "/api/posts/:username",
+      "destination": "https://jooba.herokuapp.com/api/posts/:username"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+        }
+      ]
+    }
+  ]
+}

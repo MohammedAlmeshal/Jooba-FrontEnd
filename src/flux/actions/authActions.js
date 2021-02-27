@@ -1,6 +1,5 @@
 import axios from "axios";
 import { returnErrors } from "./errorActions";
-import prodLink from '../route';
 import {
   USER_LOADING,
   AUTH_ERROR,
@@ -13,17 +12,17 @@ import {
 } from "./types";
 
 // check token & load user
-export const loadUser = () =>  (dispatch, getState) => {
+export const loadUser = () => (dispatch, getState) => {
   // User Loading
   dispatch({ type: USER_LOADING });
 
-   axios
-    .get(`${prodLink}/api/auth/user`, tokenConfig(getState))
+  axios
+    .get(`/api/auth/user`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: USER_LOADED, payload: res.data });
     })
     .catch((err) => {
-     dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({ type: AUTH_ERROR });
     });
 };
@@ -41,7 +40,7 @@ export const register = ({ name, username, email, password }) => (dispatch) => {
   const body = JSON.stringify({ name, username, email, password });
 
   axios
-    .post(`${prodLink}/api/users`, body, config)
+    .post(`/api/users`, body, config)
     .then((res) => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch(
@@ -63,7 +62,7 @@ export const login = ({ username, password }) => (dispatch) => {
   const body = JSON.stringify({ username, password });
 
   axios
-    .post(`${prodLink}/api/auth`, body, config)
+    .post(`/api/auth`, body, config)
     .then((res) => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch(

@@ -1,7 +1,6 @@
 import {  ASK_QUESTION, DELETE_POST, ANSWER_QUESTION, GET_PROFILE,PROFILE_LOADING } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
-import prodLink from '../route';
 
 import axios from "axios";
 
@@ -11,9 +10,9 @@ export const getProfile = (username) => (dispatch, getState) => {
   const endpoint = {};
 
   if (auth.isAuthenticated && auth.user.username === username) {
-    endpoint.path = `${prodLink}/api/profiles`;
+    endpoint.path = `/api/profiles`;
     endpoint.config = tokenConfig(getState);
-  } else endpoint.path = `${prodLink}/api/profiles/${username}`;
+  } else endpoint.path = `/api/profiles/${username}`;
   axios
     .get(endpoint.path, endpoint.config)
     .then((res) => {
@@ -26,7 +25,7 @@ export const getProfile = (username) => (dispatch, getState) => {
 export const answerToQuestion = (answer, id) => (dispatch, getState) => {
   //  dispatch(setItemsLoading());
   axios
-    .post(`${prodLink}/api/posts/answer/${id}`, { answer }, tokenConfig(getState))
+    .post(`/api/posts/answer/${id}`, { answer }, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: ANSWER_QUESTION, payload: { post: res.data, id } });
     })
@@ -37,7 +36,7 @@ export const answerToQuestion = (answer, id) => (dispatch, getState) => {
 export const ignoreQuestion = (id) => (dispatch, getState) => {
   //  dispatch(setItemsLoading());
   axios
-    .delete(`${prodLink}/api/posts/${id}`, tokenConfig(getState))
+    .delete(`/api/posts/${id}`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: DELETE_POST, payload: id });
     })
@@ -49,7 +48,7 @@ export const ignoreQuestion = (id) => (dispatch, getState) => {
 export const askQuestion = (question, username) => (dispatch) => {
   //  dispatch(setItemsLoading());
   axios
-    .post(`${prodLink}/api/posts/${username}`, { question })
+    .post(`/api/posts/${username}`, { question })
     .then((res) => {
       dispatch({ type: ASK_QUESTION, payload: res.data });
     })
