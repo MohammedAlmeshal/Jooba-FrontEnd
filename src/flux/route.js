@@ -1,5 +1,5 @@
-const prodLink 
-if (process.env.NODE_ENV !== 'production') {
+var prodLink;
+if (process.env.VERCEL_ENV !== 'production') {
     prodLink='https://jooba.herokuapp.com'
   } else{
     prodLink = '' 
