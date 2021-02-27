@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    {
+      "source": "/api/auth",
+      "destination": "https://jooba.herokuapp.com/api/auth"
+    }
+  ]
+}
