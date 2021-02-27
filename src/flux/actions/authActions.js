@@ -17,7 +17,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get(`/api/auth/user`, tokenConfig(getState))
+    .get(`https://jooba.herokuapp.com/api/auth/user`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: USER_LOADED, payload: res.data });
     })
