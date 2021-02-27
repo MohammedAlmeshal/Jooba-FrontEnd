@@ -9,7 +9,7 @@ import store from "./store";
 import { loadUser } from "./flux/actions/authActions";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import Nav from "./components/Nav";
+import Nav from "./components/Nav"; 
 
 
 function App() {
