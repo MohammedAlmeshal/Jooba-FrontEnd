@@ -1,5 +1,6 @@
 import axios from "axios";
 import { returnErrors } from "./errorActions";
+import prodLink from '../route';
 import {
   USER_LOADING,
   AUTH_ERROR,
@@ -17,7 +18,7 @@ export const loadUser = () =>  (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
    axios
-    .get("/api/auth/user", tokenConfig(getState))
+    .get(`${prodLink}/api/auth/user`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: USER_LOADED, payload: res.data });
     })
@@ -40,7 +41,7 @@ export const register = ({ name, username, email, password }) => (dispatch) => {
   const body = JSON.stringify({ name, username, email, password });
 
   axios
-    .post("/api/users", body, config)
+    .post(`${prodLink}/api/users`, body, config)
     .then((res) => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch(
@@ -62,7 +63,7 @@ export const login = ({ username, password }) => (dispatch) => {
   const body = JSON.stringify({ username, password });
 
   axios
-    .post("/api/auth", body, config)
+    .post(`${prodLink}/api/auth`, body, config)
     .then((res) => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
     .catch((err) => {
       dispatch(
