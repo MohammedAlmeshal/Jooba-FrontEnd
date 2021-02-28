@@ -1,6 +1,7 @@
 {
 
     "rewrites": [
+      { "source": "/api/:match*", "destination": "https://jooba.herokuapp.com/api/:match*" },
       { "source": "/api/:match*", "destination": "https://jooba.herokuapp.com/api/:match*" }
     ]
   }
