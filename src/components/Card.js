@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { ignoreQuestion, answerToQuestion } from "../flux/actions";
 import AnswerModal from "./AnswerModal";
-import FadeIn from "react-fade-in";
 
 import {
   Avatar,
