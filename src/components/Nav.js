@@ -74,7 +74,14 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
         bg="transparent"
         _hover={{ background: `${color}`, color: "white" }}
         _active={{ background: `${color}`, color: "white" }}
-        isActive={location.pathname === "/" ? true : false}
+        isActive={
+          location.pathname === "/en" ||
+          location.pathname === "/en/" ||
+          location.pathname === "/ar" ||
+          location.pathname === "/ar/"
+            ? true
+            : false
+        }
         w="6rem"
       >
         Home
@@ -127,7 +134,12 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
               bg="transparent"
               _hover={{ background: `${color}`, color: "white" }}
               _active={{ background: `${color}`, color: "white" }}
-              isActive={location.pathname === "/login" ? true : false}
+              isActive={
+                location.pathname === "/en/login" ||
+                location.pathname === "/ar/login"
+                  ? true
+                  : false
+              }
             >
               {" "}
               Login
@@ -139,7 +151,12 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
               _hover={{ background: `${color}`, color: "white" }}
               _active={{ background: `${color}`, color: "white" }}
               w="6rem"
-              isActive={location.pathname === "/signup" ? true : false}
+              isActive={
+                location.pathname === "/en/signup" ||
+                location.pathname === "/ar/signup"
+                  ? true
+                  : false
+              }
             >
               Sign up
             </Button>

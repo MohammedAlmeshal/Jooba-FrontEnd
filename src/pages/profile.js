@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import ProfileElemnts from "../components/ProfileElemnts";
 import { connect } from "react-redux";
 import { getProfile, askQuestion } from "../flux/actions";
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, Center, Text } from "@chakra-ui/react";
+import { WarningIcon } from "@chakra-ui/icons";
 
 const Profile = ({
   isAuthenticated,
@@ -18,7 +19,6 @@ const Profile = ({
   const { username } = match.params;
   const isOwner = isAuthenticated && user.username === username ? true : false;
 
- 
   useEffect(() => {
     getProfile(username);
   }, [isAuthenticated]);
@@ -26,7 +26,12 @@ const Profile = ({
   return (
     <>
       {error.status === 404 ? (
-        <p>not found</p>
+        <>
+          <Center pt="20rem" opacity='30%' >
+            <WarningIcon boxSize="3rem" me="1rem" />{" "}
+            <Text fontSize="3xl"> Not Found </Text>
+          </Center>
+        </>
       ) : isLoading ? (
         <Spinner size="xl" />
       ) : (

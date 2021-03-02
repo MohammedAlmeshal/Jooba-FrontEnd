@@ -7,18 +7,22 @@ import Login from "./pages/login";
 import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./flux/actions/authActions";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Nav from "./components/Nav";
 
 function App() {
   const history = createBrowserHistory();
-
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
 
-  const base = "/:locale(en|ar)?";
+  const base = "/(en|ar)";
   return (
     <Provider store={store}>
       <div className="App">
@@ -29,6 +33,9 @@ function App() {
             <Route exact path={`${base}/signup`} component={SignUp}></Route>
             <Route exact path={`${base}/login`} component={Login}></Route>
             <Route exact path={`${base}/:username`} component={Profile}></Route>
+            <Redirect from="/(signup|login|)" to={`en/(signup|login|)`} />
+            <Redirect from="/:username" to={`en/:username`} />
+            <Redirect to={`en/.`} />
           </Switch>
         </Router>
       </div>

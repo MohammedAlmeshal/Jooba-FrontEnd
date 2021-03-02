@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FlashMessage from "react-flash-message";
+import AskModal from "../components/AskModal";
 import I18n from "../public/theme/i18n";
 import {
   Container,
@@ -32,11 +32,9 @@ import Card from "./Card";
 const ProfileElemnts = ({ isOwner, askQuestion, user, isItemLoading }) => {
   const [isMobile] = useMediaQuery("(max-width: 767px)");
   const { colorMode, toggleColorMode } = useColorMode();
-  const color = colorMode === "light" ? "brand.600" : "brand.300";
   const [view, setView] = useState("answered");
   const [display, setDisplay] = useState(true);
-  const [question, setQuestion] = useState("");
-  const [isActive, setIsActive] = useState(true);
+
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
 
   // push
@@ -122,54 +120,17 @@ const ProfileElemnts = ({ isOwner, askQuestion, user, isItemLoading }) => {
             position="fixed"
             sx={{ transform: "translate3d(0,0,0)" }}
             top="88vh"
-            w="20rem"
-            flexDir="column"
+            w="75%"
+            minW='20rem'
+            justify="flex-end"
           >
-            {!isItemLoading && isItemLoading !== null ? (
-              <SlideFade in={display} offsetY="30px">
-                <Alert
-                  fontSize="sm"
-                  h="25px"
-                  mb="5px"
-                  borderRadius="base"
-                  status="success"
-                  variant="left-accent"
-                >
-                  <AlertIcon p="2px" />
-                  Question sent!
-                </Alert>
-              </SlideFade>
-            ) : (
-              <Box h="25px" w="1" />
-            )}
-            <InputGroup bg={colorMode === "dark" ? "gray.800" : "white"}>
-              <Input
-                boxShadow="lg"
-                focusBorderColor={
-                  colorMode === "dark" ? "brand.300" : "brand.100"
-                }
-                onChange={(e) => setQuestion(e.target.value)}
-              />
-              <Box ms="0.5rem" boxShadow="lg" backgroundColor="transparent">
-                <Button
-                  isActive={display}
-                  boxShadow="sm"
-                  size="md"
-                  isLoading={isItemLoading}
-                  _hover={{ background: `${color}`, color: "white" }}
-                  onClick={() => {
-                    askQuestion(question, user.username);
-                    setDisplay(true);
-
-                    setTimeout(() => {
-                      setDisplay(false);
-                    }, 2000);
-                  }}
-                >
-                  Ask
-                </Button>
-              </Box>
-            </InputGroup>
+            <AskModal
+              display={display}
+              setDisplay={setDisplay}
+              askQuestion={askQuestion}
+              user={user}
+              isItemLoading={isItemLoading}
+            />
           </Flex>
         ) : null}
       </Container>
