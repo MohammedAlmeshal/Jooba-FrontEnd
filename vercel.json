@@ -1,6 +1,7 @@
 {
+  "redirects": [{ "source": "/", "destination": "/en" }],
+
   "rewrites": [
-    { "source": "/", "destination": "/en" },
     {
       "source": "/api/:match*",
       "destination": "https://jooba.herokuapp.com/api/:match*"
