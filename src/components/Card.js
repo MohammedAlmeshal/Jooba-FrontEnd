@@ -15,7 +15,6 @@ import {
   SlideFade,
 } from "@chakra-ui/react";
 import { ViewOffIcon } from "@chakra-ui/icons";
-import { set } from "mongoose";
 const Card = ({
   question,
   answer,
