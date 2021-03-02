@@ -1,20 +1,25 @@
 import React from "react";
+import I18n from "../public/theme/i18n";
 import { logout } from "../flux//actions/authActions";
 import { connect } from "react-redux";
 import { Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 
 const Logout = ({ logout }) => {
+
+const location = useLocation();
+const path = location.pathname.slice(0, 3);
   return (
     <>
       <Link
-        to="/"
+        to={`${path}/`}
         onClick={() => {
           logout();
         }}
       >
         <Text fontSize={["md", "md", "sm"]} fontWeight="700">
-          Logout
+          <I18n t="Logout" />
         </Text>
       </Link>
     </>

@@ -36,30 +36,23 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
   const Logo = colorMode === "light" ? LogoLight : LogoDark;
 
   const [lang, setLang] = useState("AR");
-  let path = "";
+  let Topath = "";
+  const path = location.pathname.slice(0, 3);
 
   if (location.pathname.startsWith("/en")) {
     document.documentElement.lang = "en";
     document.documentElement.dir = "ltr";
-    path = location.pathname.replace("en", "ar");
+    Topath = location.pathname.replace("en", "ar");
   } else if (location.pathname.startsWith("/ar")) {
     document.documentElement.lang = "ar";
     document.documentElement.dir = "rtl";
-    path = location.pathname.replace("ar", "en");
+    Topath = location.pathname.replace("ar", "en");
   }
-  const toggleLang = () => {
-    // setPath(location.pathname.replace("en", "ar"));
-    //    setPath(location.pathname.replace("ar", "en"));
-  };
 
   const langButton = (
-    <Link to={path}>
+    <Link to={Topath}>
       {" "}
-      <Button
-        _hover={{ bg: color, color: "white" }}
-        bg="transparent"
-        onClick={() => toggleLang()}
-      >
+      <Button _hover={{ bg: color, color: "white" }} bg="transparent">
         <Text>
           {" "}
           <I18n t="switchTo" />{" "}
@@ -69,7 +62,7 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
   );
 
   const home = (
-    <Link to="/">
+    <Link to={`${path}/`}>
       <Button
         bg="transparent"
         _hover={{ background: `${color}`, color: "white" }}
@@ -84,7 +77,7 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
         }
         w="6rem"
       >
-        Home
+        <I18n t="Home" />
       </Button>
     </Link>
   );
@@ -97,9 +90,9 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
   );
 
   const account = (
-    <Link to={`/${username}`}>
+    <Link to={`${path}/${username}`}>
       <Text fontSize={["md", "md", "sm"]} fontWeight="700">
-        Account
+        <I18n t="Account" />
       </Text>
     </Link>
   );
@@ -108,7 +101,7 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
       isAuthenticated ? (
         <>
           {" "}
-          <Menu>
+          <Menu >
             <MenuButton
               matchWidth={true}
               as={Button}
@@ -116,8 +109,8 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
             >
               {userInfo}
             </MenuButton>
-            <MenuList bg={BgColor}>
-              <MenuItem>{account}</MenuItem>
+            <MenuList  bg={BgColor}>
+              <MenuItem >{account}</MenuItem>
               <MenuItem>
                 <Logout />
               </MenuItem>
@@ -127,7 +120,7 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
       ) : (
         <>
           {" "}
-          <Link to="/login">
+          <Link to={`${path}/login`}>
             <Button
               m="0 1rem"
               w="6rem"
@@ -142,10 +135,10 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
               }
             >
               {" "}
-              Login
+              <I18n t="Login" />
             </Button>
           </Link>{" "}
-          <Link to="/signup">
+          <Link to={`${path}/signup`}>
             <Button
               bg="transparent"
               _hover={{ background: `${color}`, color: "white" }}
@@ -158,7 +151,7 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
                   : false
               }
             >
-              Sign up
+              <I18n t="SignUp" />
             </Button>
           </Link>{" "}
         </>
@@ -190,7 +183,7 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
         borderColor={colorMode === "light" ? "brand.100" : "brand.200"}
       >
         <Flex w="70rem" justify="space-between" align="center" m="0 2rem">
-          <Link to="/">
+        <Link to={`${path}/`}>
             <img width="85" src={Logo}></img>
           </Link>
 

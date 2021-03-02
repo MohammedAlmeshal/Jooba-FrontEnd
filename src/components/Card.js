@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import I18n from "../public/theme/i18n";
 import { connect } from "react-redux";
 import { ignoreQuestion, answerToQuestion } from "../flux/actions";
 import AnswerModal from "./AnswerModal";
@@ -12,7 +13,6 @@ import {
   Button,
   Flex,
   useColorMode,
-  SlideFade,
 } from "@chakra-ui/react";
 import { ViewOffIcon } from "@chakra-ui/icons";
 const Card = ({
@@ -63,39 +63,38 @@ const Card = ({
           }}
         >
           {" "}
-          <ViewOffIcon me="0.5rem" /> Ignore
+          <ViewOffIcon me="0.5rem" />
+          <I18n t="Ignore" />
         </Button>
       </Flex>
     </>
   );
 
   return (
-  
-      <Box
-        border="1px"
-        borderRadius="lg"
-        borderColor={colorMode === "dark" ? "whiteAlpha.200" : "gray.200"}
-        mt="1rem"
-        w="100%"
-      >
-        <Flex p="1rem" align="baseline">
-          <Heading
-            as="h4"
-            size="sm"
-            color={colorMode === "dark" ? "brand.200" : "brand.100"}
-            d="inline"
-            me="1rem"
-          >
-            Anon
-          </Heading>
-          <Text d="inline" wordBreak="break-word">
-            {question}
-          </Text>
-        </Flex>
-        <Divider />
-        {answer ? answerRender : answerActions}
-      </Box>
-   
+    <Box
+      border="1px"
+      borderRadius="lg"
+      borderColor={colorMode === "dark" ? "whiteAlpha.200" : "gray.200"}
+      mt="1rem"
+      w="100%"
+    >
+      <Flex p="1rem" align="baseline">
+        <Heading
+          as="h4"
+          size="sm"
+          color={colorMode === "dark" ? "brand.200" : "brand.100"}
+          d="inline"
+          me="1rem"
+        >
+          <I18n t="Anon" />
+        </Heading>
+        <Text d="inline" wordBreak="break-word">
+          {question}
+        </Text>
+      </Flex>
+      <Divider />
+      {answer ? answerRender : answerActions}
+    </Box>
   );
 };
 

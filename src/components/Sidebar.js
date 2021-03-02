@@ -20,7 +20,7 @@ const Sidebar = ({
   color,
   BgColor,
   isAuthenticated,
-account,
+  account,
   userInfo,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,9 +40,9 @@ account,
         onOverlayClick={onClose}
       >
         <DrawerOverlay>
-          <DrawerContent bg={BgColor} >
+          <DrawerContent bg={BgColor}>
             <DrawerCloseButton />
-            <DrawerHeader>{isAuthenticated ? userInfo : "Hello"}</DrawerHeader>
+            <DrawerHeader>{isAuthenticated ? userInfo : ""}</DrawerHeader>
 
             <DrawerBody>
               <Flex
@@ -54,8 +54,26 @@ account,
                 onClick={onClose}
               >
                 {home}
-                {account}
-                {!isAuthenticated ? links : <Button w='6rem' >< Logout /></Button>}
+
+                {!isAuthenticated ? (
+                  links
+                ) : (
+                  <>
+                    {" "}
+                    <Button
+                      _active={{ background: `${color}`, color: "white" }}
+                    >
+                      {" "}
+                      {account}
+                    </Button>
+                    <Button
+                      _active={{ background: `${color}`, color: "white" }}
+                      w="6rem"
+                    >
+                      <Logout />
+                    </Button>
+                  </>
+                )}
                 {langButton}
               </Flex>
             </DrawerBody>

@@ -5,6 +5,11 @@ const direction = document.documentElement.lang === "ar" ? "rtl" : "ltr";
 
 const theme = extendTheme({
   direction,
+  fonts: {
+    heading:
+      document.documentElement.lang == "ar" ? "Tahoma, sans-serif" : null,
+    body: document.documentElement.lang == "ar" ? "Tahoma, sans-serif" : null,
+  },
   styles: {
     global: (props) => ({
       body: {

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import I18n from "../public/theme/i18n";
+
 import {
   Modal,
   ModalOverlay,
@@ -29,15 +31,11 @@ const AnswerModal = ({
   user,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [newAnswer, setNewAnswer] = useState("");
   const { colorMode, toggleColorMode } = useColorMode();
   const color = colorMode === "light" ? "brand.600" : "brand.300";
 
   const BgColor = colorMode === "light" ? "white" : "gray.800";
   const [question, setQuestion] = useState("");
-
-  const [isActive, setIsActive] = useState(true);
-  console.log(isItemLoading);
 
   return (
     <>
@@ -51,7 +49,7 @@ const AnswerModal = ({
         {" "}
         <Text color="white" fontWeight="bold" fontSize="18px">
           {" "}
-          Ask{" "}
+          <I18n t="Ask" />{" "}
         </Text>
       </Circle>
 
@@ -64,7 +62,11 @@ const AnswerModal = ({
       >
         <ModalOverlay />
         <ModalContent bg={BgColor}>
-          <ModalHeader> Ask {`${user.name}`}</ModalHeader>
+          <ModalHeader>
+            {" "}
+            <I18n t="Ask" />
+            {`${user.name}`}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Flex flexDir="column" justify="center" m="0 2rem">
@@ -79,7 +81,7 @@ const AnswerModal = ({
                     variant="left-accent"
                   >
                     <AlertIcon p="2px" />
-                    Question sent!
+                    <I18n t="questionSent" />
                   </Alert>
                 </SlideFade>
               ) : (
@@ -110,7 +112,7 @@ const AnswerModal = ({
                       }, 2000);
                     }}
                   >
-                    Send
+                    <I18n t="send" />
                   </Button>
                 </Box>
               </InputGroup>
