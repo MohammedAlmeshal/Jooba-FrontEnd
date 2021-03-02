@@ -18,11 +18,13 @@ const Sidebar = ({
   home,
   langButton,
   color,
+  BgColor,
   isAuthenticated,
-
+account,
   userInfo,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const btnRef = React.useRef();
   return (
     <Center h="45px">
@@ -38,7 +40,7 @@ const Sidebar = ({
         onOverlayClick={onClose}
       >
         <DrawerOverlay>
-          <DrawerContent>
+          <DrawerContent bg={BgColor} >
             <DrawerCloseButton />
             <DrawerHeader>{isAuthenticated ? userInfo : "Hello"}</DrawerHeader>
 
@@ -52,6 +54,7 @@ const Sidebar = ({
                 onClick={onClose}
               >
                 {home}
+                {account}
                 {!isAuthenticated ? links : <Button w='6rem' >< Logout /></Button>}
                 {langButton}
               </Flex>

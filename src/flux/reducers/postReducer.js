@@ -2,6 +2,7 @@ import {
   GET_PROFILE,
   ASK_QUESTION,
   PROFILE_LOADING,
+  ITEM_LOADING,
   DELETE_POST,
   ANSWER_QUESTION,
 } from "../actions/types";
@@ -9,6 +10,7 @@ import {
 const initialState = {
   profile: {
     posts: [],
+    isItemLoading: null,
   },
   isLoading: true,
 };
@@ -18,11 +20,12 @@ export default function (state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: action.payload,
+        profile: {...state.profile, ...action.payload},
         isLoading: false,
       };
-    // case ASK_QUESTION:
-    //   return { ...state, posts: [action.payload, ...state.posts] };
+    case ASK_QUESTION:
+  
+    return { ...state,   profile: {...state.profile,   isItemLoading: false, },};
     case DELETE_POST:
       return {
         ...state,
@@ -36,6 +39,7 @@ export default function (state = initialState, action) {
     case ANSWER_QUESTION:
       return {
         ...state,
+        isLoading: false,
         profile: {
           ...state.profile,
           posts: [
@@ -50,6 +54,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: true,
+      };
+    case ITEM_LOADING:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          isItemLoading: true,
+        },
       };
     default:
       return state;

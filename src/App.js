@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import Home from './pages'
+import Home from "./pages";
 import Profile from "./pages/profile";
 import SignUp from "./pages/signup";
 import Login from "./pages/login";
@@ -9,8 +9,7 @@ import store from "./store";
 import { loadUser } from "./flux/actions/authActions";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import Nav from "./components/Nav"; 
-
+import Nav from "./components/Nav";
 
 function App() {
   const history = createBrowserHistory();
@@ -19,16 +18,17 @@ function App() {
     store.dispatch(loadUser());
   }, []);
 
+  const base = "/:locale(en|ar)?";
   return (
     <Provider store={store}>
       <div className="App">
         <Router history={history}>
-          <Nav/>
+          <Nav />
           <Switch>
-          <Route exact path="/" component={Home}></Route>
-            <Route exact path="/signup" component={SignUp}></Route>
-            <Route exact path="/login" component={Login}></Route>
-            <Route exact path="/:username" component={Profile}></Route>
+            <Route exact path={base} component={Home}></Route>
+            <Route exact path={`${base}/signup`} component={SignUp}></Route>
+            <Route exact path={`${base}/login`} component={Login}></Route>
+            <Route exact path={`${base}/:username`} component={Profile}></Route>
           </Switch>
         </Router>
       </div>

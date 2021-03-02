@@ -1,11 +1,11 @@
-import {  ASK_QUESTION, DELETE_POST, ANSWER_QUESTION, GET_PROFILE,PROFILE_LOADING } from "./types";
+import {  ASK_QUESTION, DELETE_POST, ANSWER_QUESTION, GET_PROFILE,PROFILE_LOADING ,ITEM_LOADING} from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
 import axios from "axios";
 
 export const getProfile = (username) => (dispatch, getState) => {
-   dispatch(setItemsLoading());
+   dispatch(setProfileLoading());
   const { auth } = getState();
   const endpoint = {};
 
@@ -46,7 +46,7 @@ export const ignoreQuestion = (id) => (dispatch, getState) => {
 };
 
 export const askQuestion = (question, username) => (dispatch) => {
-  //  dispatch(setItemsLoading());
+   dispatch(setItemsLoading());
   axios
     .post(`/api/posts/${username}`, { question })
     .then((res) => {
@@ -57,8 +57,16 @@ export const askQuestion = (question, username) => (dispatch) => {
     );
 };
 
-export const setItemsLoading = () => {
+export const setProfileLoading = () => {
   return {
     type: PROFILE_LOADING,
   };
 };
+
+export const setItemsLoading = () => {
+  return {
+    type: ITEM_LOADING,
+  };
+};
+
+

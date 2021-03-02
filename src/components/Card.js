@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { ignoreQuestion, answerToQuestion } from "../flux/actions";
 import AnswerModal from "./AnswerModal";
+import FadeIn from "react-fade-in";
 
 import {
   Avatar,
@@ -12,9 +13,10 @@ import {
   Button,
   Flex,
   useColorMode,
+  SlideFade,
 } from "@chakra-ui/react";
 import { ViewOffIcon } from "@chakra-ui/icons";
-
+import { set } from "mongoose";
 const Card = ({
   question,
   answer,
@@ -25,6 +27,7 @@ const Card = ({
   isMobile,
 }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const [display, setDisplay] = useState("");
 
   const answerRender = user ? (
     <Box p="1rem">
@@ -35,7 +38,7 @@ const Card = ({
         />
 
         <Heading as="h4" size="sm" d="inline" ms="0.8rem">
-          Mohammed
+          {user.name}
         </Heading>
       </Flex>
 
@@ -56,44 +59,45 @@ const Card = ({
         <Button
           variant="ghost"
           fontSize="14px"
-          onClick={() => ignoreQuestion(id)}
+          onClick={() => {
+            ignoreQuestion(id);
+            setDisplay(id);
+          }}
         >
           {" "}
-          <ViewOffIcon
-        
-            me="0.5rem"
-          />{" "}
-          Ignore
+          <ViewOffIcon me="0.5rem" /> Ignore
         </Button>
       </Flex>
     </>
   );
 
   return (
-    <Box
-      border="1px"
-      borderRadius="lg"
-      borderColor={colorMode === "dark" ? "gray.500" : "gray.200"}
-      mt="1rem"
-      w="100%"
-    >
-      <Flex p="1rem" align="baseline">
-        <Heading
-          as="h4"
-          size="sm"
-          color={colorMode === "dark" ? "brand.200" : "brand.100"}
-          d="inline"
-          me="1rem"
-        >
-          Anon
-        </Heading>
-        <Text d="inline" wordBreak="break-word">
-          {question}
-        </Text>
-      </Flex>
-      <Divider />
-      {answer ? answerRender : answerActions}
-    </Box>
+  
+      <Box
+        border="1px"
+        borderRadius="lg"
+        borderColor={colorMode === "dark" ? "whiteAlpha.200" : "gray.200"}
+        mt="1rem"
+        w="100%"
+      >
+        <Flex p="1rem" align="baseline">
+          <Heading
+            as="h4"
+            size="sm"
+            color={colorMode === "dark" ? "brand.200" : "brand.100"}
+            d="inline"
+            me="1rem"
+          >
+            Anon
+          </Heading>
+          <Text d="inline" wordBreak="break-word">
+            {question}
+          </Text>
+        </Flex>
+        <Divider />
+        {answer ? answerRender : answerActions}
+      </Box>
+   
   );
 };
 

@@ -1,8 +1,9 @@
-export const GET_PROFILE = 'GET_PROFILE';
-export const PROFILE_LOADING = 'PROFILE_LOADING'
-export const DELETE_POST = 'DELETE_POST';
-export const ASK_QUESTION = 'ASK_QUESTION';
-export const ANSWER_QUESTION = 'ANSWER_QUESTION';
+export const GET_PROFILE = "GET_PROFILE";
+export const PROFILE_LOADING = "PROFILE_LOADING";
+export const ITEM_LOADING = "ITEM_LOADING";
+export const DELETE_POST = "DELETE_POST";
+export const ASK_QUESTION = "ASK_QUESTION";
+export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
 export const USER_LOADING = "USER_LOADING ";
 export const USER_LOADED = "USER_LOADED";

@@ -12,12 +12,13 @@ const Profile = ({
   user,
   profile,
   isLoading,
+  isItemLoading,
   error,
 }) => {
   const { username } = match.params;
   const isOwner = isAuthenticated && user.username === username ? true : false;
 
-  console.log("render");
+ 
   useEffect(() => {
     getProfile(username);
   }, [isAuthenticated]);
@@ -33,6 +34,7 @@ const Profile = ({
           askQuestion={askQuestion}
           isOwner={isOwner}
           user={profile}
+          isItemLoading={isItemLoading}
         ></ProfileElemnts>
       )}
     </>
@@ -45,6 +47,7 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
     isLoading: state.profiles.isLoading,
+    isItemLoading: state.profiles.profile.isItemLoading,
     error: state.error,
   };
 };

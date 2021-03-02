@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import I18n from "../public/theme/i18n";
+
 import {
   useColorMode,
   Button,
@@ -15,12 +17,7 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import {
-  MoonIcon,
-  SunIcon,
-  ChevronDownIcon,
-  ArrowBackIcon,
-} from "@chakra-ui/icons";
+import { MoonIcon, SunIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 import Navbar from "./Navbar";
 import Logout from "./Logout";
@@ -31,25 +28,45 @@ import Sidebar from "./Sidebar";
 const Nav = ({ isAuthenticated, isLoading, username }) => {
   const location = useLocation();
 
-  const { colorMode, toggleColorMode } = useColorMode();
-  const [lang, setLang] = useState("AR");
   const [isMobile] = useMediaQuery("(max-width: 767px)");
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const color = colorMode === "light" ? "brand.600" : "brand.300";
   const BgColor = colorMode === "light" ? "white" : "gray.800";
-  const Logo = colorMode === "light" ? LogoLight: LogoDark;
+  const Logo = colorMode === "light" ? LogoLight : LogoDark;
 
+  const [lang, setLang] = useState("AR");
+  let path = "";
+
+  if (location.pathname.startsWith("/en")) {
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+    path = location.pathname.replace("en", "ar");
+  } else if (location.pathname.startsWith("/ar")) {
+    document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
+    path = location.pathname.replace("ar", "en");
+  }
   const toggleLang = () => {
-    if (document.documentElement.lang === "ar") {
-      document.documentElement.lang = "en";
-      document.documentElement.dir = "ltr";
-      setLang("AR");
-    } else {
-      document.documentElement.lang = "ar";
-      document.documentElement.dir = "rtl";
-      setLang("EN");
-    }
+    // setPath(location.pathname.replace("en", "ar"));
+    //    setPath(location.pathname.replace("ar", "en"));
   };
+
+  const langButton = (
+    <Link to={path}>
+      {" "}
+      <Button
+        _hover={{ bg: color, color: "white" }}
+        bg="transparent"
+        onClick={() => toggleLang()}
+      >
+        <Text>
+          {" "}
+          <I18n t="switchTo" />{" "}
+        </Text>
+      </Button>{" "}
+    </Link>
+  );
 
   const home = (
     <Link to="/">
@@ -71,6 +88,14 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
       <Text fontSize="md"> {username}</Text>
     </Flex>
   );
+
+  const account = (
+    <Link to={`/${username}`}>
+      <Text fontSize={["md", "md", "sm"]} fontWeight="700">
+        Account
+      </Text>
+    </Link>
+  );
   const links =
     !isLoading && isLoading !== null ? (
       isAuthenticated ? (
@@ -84,7 +109,8 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
             >
               {userInfo}
             </MenuButton>
-            <MenuList>
+            <MenuList bg={BgColor}>
+              <MenuItem>{account}</MenuItem>
               <MenuItem>
                 <Logout />
               </MenuItem>
@@ -123,19 +149,15 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
     ) : null;
 
   const darkModeButton = (
-    <Button      _hover={{ bg: color, color: "white" }} me="1rem" bg="transparent" _focus="none" onClick={toggleColorMode}>
+    <Button
+      _hover={{ bg: color, color: "white" }}
+      me="1rem"
+      bg="transparent"
+      _focus="none"
+      onClick={toggleColorMode}
+    >
       {" "}
       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-    </Button>
-  );
-
-  const langButton = (
-    <Button      _hover={{ bg: color, color: "white" }} bg="transparent" onClick={() => toggleLang()}>
-      {document.documentElement.lang === "ar" ? (
-        <Text>{lang}</Text>
-      ) : (
-        <Text>{lang}</Text>
-      )}
     </Button>
   );
 
@@ -151,7 +173,9 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
         borderColor={colorMode === "light" ? "brand.100" : "brand.200"}
       >
         <Flex w="70rem" justify="space-between" align="center" m="0 2rem">
-          <img width="85" src={Logo}></img>
+          <Link to="/">
+            <img width="85" src={Logo}></img>
+          </Link>
 
           {isMobile ? (
             <Flex align="center">
@@ -164,6 +188,8 @@ const Nav = ({ isAuthenticated, isLoading, username }) => {
                 color={color}
                 isAuthenticated={isAuthenticated}
                 userInfo={userInfo}
+                account={account}
+                BgColor={BgColor}
               />
             </Flex>
           ) : (

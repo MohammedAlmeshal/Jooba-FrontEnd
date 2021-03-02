@@ -13,7 +13,7 @@ const Logout = ({ logout }) => {
           logout();
         }}
       >
-        <Text fontSize={['md','md','sm']}  fontWeight="700">
+        <Text fontSize={["md", "md", "sm"]} fontWeight="700">
           Logout
         </Text>
       </Link>
