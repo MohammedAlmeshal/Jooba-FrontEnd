@@ -62,7 +62,7 @@ const ProfileElemnts = ({ isOwner, askQuestion, user, isItemLoading }) => {
   return (
     <div>
       <Fade in={true}>
-        <Container h="150vh" maxW="70rem" centerContent pt="8rem">
+        <Container maxW="70rem" centerContent pt="8rem">
           <Flex
             p="1rem"
             align="center"
@@ -121,7 +121,7 @@ const ProfileElemnts = ({ isOwner, askQuestion, user, isItemLoading }) => {
             <Flex
               position="fixed"
               sx={{ transform: "translate3d(0,0,0)" }}
-              top="88vh"
+              top={["78vh", "78vh", "88vh"]}
               w="75%"
               minW="20rem"
               justify="flex-end"

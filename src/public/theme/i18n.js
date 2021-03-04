@@ -44,7 +44,7 @@ const translations = {
     Asnwered: "الأجوبة",
     Inbox: "الأسئلة",
     Home: "الرئيسية",
-    Account: "آلملف الشخصي",
+    Account: "الملف الشخصي",
     Login: "الدخول",
     SignUp: "التسجيل",
     Logout: "خروج",

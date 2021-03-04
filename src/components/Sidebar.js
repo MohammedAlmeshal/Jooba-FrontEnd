@@ -41,7 +41,7 @@ const Sidebar = ({
       >
         <DrawerOverlay>
           <DrawerContent bg={BgColor}>
-            <DrawerCloseButton />
+            <DrawerCloseButton ms='17rem' />
             <DrawerHeader>{isAuthenticated ? userInfo : ""}</DrawerHeader>
 
             <DrawerBody>

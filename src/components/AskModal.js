@@ -49,7 +49,7 @@ const AnswerModal = ({
         {" "}
         <Text color="white" fontWeight="bold" fontSize="18px">
           {" "}
-          <I18n t="Ask" />{" "}
+          <I18n t="Ask" />
         </Text>
       </Circle>
 
@@ -64,10 +64,10 @@ const AnswerModal = ({
         <ModalContent bg={BgColor}>
           <ModalHeader>
             {" "}
-            <I18n t="Ask" />
+            <I18n t="Ask" />&nbsp;
             {`${user.name}`}
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton  ms='20rem' />
           <ModalBody>
             <Flex flexDir="column" justify="center" m="0 2rem">
               {!isItemLoading && isItemLoading !== null ? (
@@ -112,7 +112,7 @@ const AnswerModal = ({
                       }, 2000);
                     }}
                   >
-                    <I18n t="send" />
+                    <I18n t="Send" />
                   </Button>
                 </Box>
               </InputGroup>
