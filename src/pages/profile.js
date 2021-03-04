@@ -33,7 +33,10 @@ const Profile = ({
           </Center>
         </>
       ) : isLoading ? (
-        <Spinner size="xl" />
+        <Center pt="20rem" opacity='30%' >
+     <Spinner  size="xl" />
+      </Center>
+      
       ) : (
         <ProfileElemnts
           askQuestion={askQuestion}
