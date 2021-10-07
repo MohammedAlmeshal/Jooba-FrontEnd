@@ -42,7 +42,7 @@ export const register =
     const body = JSON.stringify({ name, username, email, password });
 
     axios
-      .post(`api/auth/signup`, body, config)
+      .post(`/api/auth/signup`, body, config)
       .then((res) => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
       .catch((err) => {
         dispatch(
