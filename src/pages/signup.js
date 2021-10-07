@@ -34,7 +34,6 @@ const SignUp = ({
   const location = useLocation();
   const path = location.pathname.slice(0, 3);
 
-
   const { colorMode, toggleColorMode } = useColorMode();
   const color = colorMode === "light" ? "brand.600" : "brand.300";
   const Logo = colorMode === "light" ? LogoLight : LogoDark;
@@ -47,14 +46,14 @@ const SignUp = ({
     if (isAuthenticated) {
       clearErrors();
 
-      history.push(`${path}/${toUsername}`);
+      history.push(`${path}/login`);
     }
   }, [isAuthenticated]);
 
   const validateName = (value) => {
     let error;
     if (!value) {
-      error =  <I18n t='Nrequired' /> ;
+      error = <I18n t="Nrequired" />;
 
       return error;
     }
@@ -63,7 +62,7 @@ const SignUp = ({
   const validateUsername = (value) => {
     let error;
     if (!value) {
-      error =  <I18n t='Urequired' /> ;
+      error = <I18n t="Urequired" />;
 
       return error;
     }
@@ -72,11 +71,9 @@ const SignUp = ({
   const validateEmail = (value) => {
     let error;
     if (!value) {
-      error =  <I18n t='Required' /> ;
-
+      error = <I18n t="Required" />;
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-      error =  <I18n t='eError' /> ;
-
+      error = <I18n t="eError" />;
     }
     return error;
   };
@@ -84,11 +81,9 @@ const SignUp = ({
   const validatePassword = (value) => {
     let error;
     if (!value) {
-      error =  <I18n t='Prequired' /> ;
-
+      error = <I18n t="Prequired" />;
     } else if (!/^[A-Z0-9._%+-?]{6,16}$/i.test(value)) {
-      error =  <I18n t='pError' /> ;
-
+      error = <I18n t="pError" />;
     }
 
     return error;
