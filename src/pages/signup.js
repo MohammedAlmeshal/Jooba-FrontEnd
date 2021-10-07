@@ -113,6 +113,7 @@ const SignUp = ({
                 onSubmit={(values, actions) => {
                   const { name, username, email, password } = values;
                   register({ name, username, email, password });
+                  history.push(`${path}/login`);
                 }}
               >
                 {(props) => (
